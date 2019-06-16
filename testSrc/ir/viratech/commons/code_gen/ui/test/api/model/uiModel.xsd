@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema id="uiModel" 
+		elementFormDefault="qualified" 
+		attributeFormDefault="unqualified"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+		targetNamespace="http://viraTech.ir/code_gen/ui/uiModel" 
+		xmlns:tns="http://viraTech.ir/code_gen/ui/uiModel" >
+	
+	
+	<xs:simpleType name="javaIdentifier">
+		<xs:annotation>
+			<xs:documentation>Java identifier</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[\p{L}$_][\w$_]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="javaPackage">
+		<xs:annotation>
+			<xs:documentation>Java package</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[\p{L}$_][\w$_.\t ]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="javaSimpleELExpression">
+		<xs:annotation>
+			<xs:documentation>Java Simple EL Expression</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[\p{L}$_][\w$_.\t ]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="javaType" >
+		<xs:annotation>
+			<xs:documentation>Java type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token" >
+			<xs:pattern value="[\p{L}$_][\w$_.\t \[\]&lt;&gt;\(\),]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	
+	
+	<xs:complexType name="abstractProp">
+		<xs:attribute name="name" type="tns:javaIdentifier" use="required" />
+		
+		<xs:attribute name="internalName" type="tns:javaIdentifier" use="optional" />
+
+		<xs:attribute name="type" type="tns:javaType" use="optional" default="string" />
+		
+		<xs:attribute name="internalType" type="tns:javaType" use="optional" />
+		
+		<xs:attribute name="trackModif" type="xs:boolean" use="optional" default="false" >
+			<xs:annotation>
+				<xs:documentation>Adds '__modified__Abc' attribute to track modifications of this property.</xs:documentation>
+				<xs:documentation>Only meaningful when save is not disabled.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+		<xs:attribute name="client-required" type="xs:boolean" use="optional" default="false" />
+		
+		<xs:attribute name="client-widget" type="xs:string" use="optional" >
+			<xs:annotation>
+				<xs:documentation>The client-side widget of this property</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+		<xs:attribute name="client-searchLevel" type="xs:integer" use="optional" />
+		
+		<xs:attribute name="toString" use="optional" default="value" >
+			<xs:annotation>
+				<xs:documentation>State of this property in 'toString()'.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType >
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="value" >
+						<xs:annotation>
+							<xs:documentation>Simply the value of the property is provided in 'toString()'.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="omitted" >
+						<xs:annotation>
+							<xs:documentation>The property is omitted in 'toString()'.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="hooked" >
+						<xs:annotation>
+							<xs:documentation>The value of the property is provided in 'toString()' through a hook function 'toString_Abc(T abc)'.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="abstract" >
+						<xs:annotation>
+							<xs:documentation>The value of the property is provided in 'toString()' through an abstract function 'toString_Abc(T abc)'.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		
+		<xs:attribute name="fieldInfo" use="optional" >
+			<xs:annotation>
+				<xs:documentation>FieldInfo style of this property (defaults to the 'load' style).</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType >
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="simple" >
+						<xs:annotation>
+							<xs:documentation>The FieldInfo of the property is provided through a simple implementation of method 'createFieldInfo_Abc(...)'.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="disabled" >
+						<xs:annotation>
+							<xs:documentation>The property does not have a FieldInfo.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="abstract" >
+						<xs:annotation>
+							<xs:documentation>The FieldInfo of the property is provided through an abstract method 'createFieldInfo_Abc(...)'.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		
+		<xs:attribute name="searchable" type="xs:boolean" use="optional" >
+			<xs:annotation>
+				<xs:documentation>Searchability of this property (defaults to the 'load' style).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+		<xs:attribute name="searchExp" type="tns:javaSimpleELExpression" use="optional" >
+			<xs:annotation>
+				<xs:documentation>The internal search expression</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+		<xs:attribute name="bundleKey" type="xs:string" use="optional" >
+			<xs:annotation>
+				<xs:documentation>Used in localization</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+
+									
+	</xs:complexType>
+	
+	
+	
+	<xs:complexType name="Prop" >
+		<xs:complexContent>
+			<xs:extension base="tns:abstractProp">
+				
+				<xs:attribute name="load" use="optional" default="simple" >
+					<xs:annotation>
+						<xs:documentation>State of load for this property.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType >
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="simple" >
+								<xs:annotation>
+									<xs:documentation>Simply the value of the property is loaded.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="disabled" >
+								<xs:annotation>
+									<xs:documentation>The property cannot be loaded.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-cast" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through a hook function 'load_Abc(X obj)' with a simple cast implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-dtoLoadFrom" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through a hook function 'load_Abc(X obj)' with a dto loadFrom implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-constructor" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through a hook function 'load_Abc(X obj)' with a constructor implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="abstract" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through an abstract function 'load_Abc(X obj)'.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				
+				<xs:attribute name="save" use="optional" default="simple" >
+					<xs:annotation>
+						<xs:documentation>State of save for this property.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType >
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="simple" >
+								<xs:annotation>
+									<xs:documentation>Simply the value of the property is saved.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="disabled" >
+								<xs:annotation>
+									<xs:documentation>
+										The property cannot be saved.
+										Even, its setter method is not provided.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="disabled-withSetter" >
+								<xs:annotation>
+									<xs:documentation>
+										The property cannot be saved.
+										But, its setter method is provided.
+										And thus, the json value is written on the dto.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-dtoSaveTo-ignoreNull" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+									<xs:documentation>The function uses the saveTo function of the dto to save its data to the underlying object.</xs:documentation>
+									<xs:documentation>The dto can be null and then it is ignored and nothing happens.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="abstract" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through an abstract function 'save_Abc(X obj, T abc)'.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				
+				
+				<xs:attribute name="sortable" type="xs:boolean" use="optional" >
+					<xs:annotation>
+						<xs:documentation>Sortability of this property (default is based on the type).</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				
+				<xs:attribute name="fieldInfoType" type="tns:javaType" use="optional" >
+					<xs:annotation>
+						<xs:documentation>The FieldInfo type used for this property.</xs:documentation>
+						<xs:documentation>It must have a constructor of the form: (String externalName, String internalName).</xs:documentation>
+						<xs:documentation>By default, it is inferred by the type.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				
+				<xs:attribute name="typeKey" type="xs:string" use="optional" >
+					<xs:annotation>
+						<xs:documentation>The public typeKey of this property</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				
+				<!-- 
+				TODO: define it as a child tag
+				<xs:attribute name="client-customProp" type="xs:string" use="optional" >
+					<xs:annotation>
+						<xs:documentation>Extera information.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				 -->
+				
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="Prop-Dto" >
+		<xs:complexContent>
+			<xs:extension base="tns:abstractProp">
+				
+				<xs:attribute name="fieldInfoContextClass" type="tns:javaType" use="optional" >
+					<xs:annotation>
+						<xs:documentation>Not usually used. It is guessed by the Dto.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				
+				<xs:attribute name="load" use="optional" default="hooked-dtoLoadFrom" >
+					<xs:annotation>
+						<xs:documentation>State of load for this property.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType >
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="disabled" >
+								<xs:annotation>
+									<xs:documentation>The property cannot be loaded.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-cast" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through a hook function 'load_Abc(X obj)' with a simple cast implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-dtoLoadFrom" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through a hook function 'load_Abc(X obj)' with a dto loadFrom implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-constructor" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through a hook function 'load_Abc(X obj)' with a constructor implementation.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="abstract" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is loaded through an abstract function 'load_Abc(X obj)'.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				
+				<xs:attribute name="save" use="optional" default="abstract" >
+					<xs:annotation>
+						<xs:documentation>State of save for this property.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType >
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="disabled" >
+								<xs:annotation>
+									<xs:documentation>
+										The property cannot be saved.
+										Even, its setter method is not provided.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="disabled-withSetter" >
+								<xs:annotation>
+									<xs:documentation>
+										The property cannot be saved.
+										But, its setter method is provided.
+										And thus, the json value is written on the dto.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="abstract" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through an abstract function 'save_Abc(X obj, T abc)'.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-dtoSaveTo-ignoreNull" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+									<xs:documentation>The function uses the saveTo function of the dto to save its data to the underlying object.</xs:documentation>
+									<xs:documentation>The dto can be null and then it is ignored and nothing happens.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-dtoSaveTo-notNull" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+									<xs:documentation>The function uses the saveTo function of the dto to save its data to the underlying object.</xs:documentation>
+									<xs:documentation>The dto cannot be null.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="hooked-dtoSaveTo-nullable" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+									<xs:documentation>The function uses the saveTo function of the dto to save its data to the underlying object.</xs:documentation>
+									<xs:documentation>The dto can be null and sets the underlying object to null.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							
+							<xs:enumeration value="hooked-replaceEntity-notNull" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+									<xs:documentation>The function replaces the underlying object based on the dto.</xs:documentation>
+									<xs:documentation>The function findByDto_Abc(Dto) should be provided.</xs:documentation>
+									<xs:documentation>The dto cannot be null.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							
+							<xs:enumeration value="hooked-replaceEntity-nullable" >
+								<xs:annotation>
+									<xs:documentation>The value of the property is saved through a hook function 'save_Abc(X obj, T abc)'.</xs:documentation>
+									<xs:documentation>The function replaces the underlying object based on the dto.</xs:documentation>
+									<xs:documentation>The function findByDto_Abc(Dto) should be provided.</xs:documentation>
+									<xs:documentation>The dto can be null.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				
+				<xs:attribute name="entityByDtoFinder" use="optional" >
+					<xs:annotation>
+						<xs:documentation>Shows how the entity can be found by the dto using the function MyDTO.FieldInfoContext.findByDto_Abc(AbcDto abcDto).</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType >
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="disabled" >
+								<xs:annotation>
+									<xs:documentation>The function is not provided.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="abstract" >
+								<xs:annotation>
+									<xs:documentation>The function is defined abstract.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				
+				<xs:attribute name="findByDto" use="optional" >
+					<xs:annotation>
+						<xs:documentation>Shows how the entity can be found by the dto using the function MyDTO.findByDto_Abc(AbcDto abcDto).</xs:documentation>
+						<xs:documentation>Used when 'save' is in 'replaceEntity' mode.</xs:documentation>
+						<xs:documentation>Default is defined based on the 'save' mode.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType >
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="disabled" >
+								<xs:annotation>
+									<xs:documentation>The function is not provided.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="abstract" >
+								<xs:annotation>
+									<xs:documentation>The function is defined abstract.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="useContext" >
+								<xs:annotation>
+									<xs:documentation>The function uses a similar method in the FieldInfoContext of the dto.</xs:documentation>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="Extent" >
+		<xs:annotation>
+			<xs:documentation>extent</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="key" type="xs:token" use="required" />
+		<xs:attribute name="ficClass" type="tns:javaType" use="required" />
+	</xs:complexType>
+	
+	<xs:element name="uiModel">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				
+				
+				<xs:element name="dto">
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded" >
+							
+							<xs:element name="prop" type="tns:Prop" />
+								
+							<xs:element name="prop-dto" type="tns:Prop-Dto" />
+							
+							
+						</xs:choice>
+						<xs:attribute name="id" type="xs:token" use="optional" />
+						<xs:attribute name="name" type="tns:javaIdentifier" use="optional" />
+						<xs:attribute name="entityName" type="tns:javaIdentifier" use="optional" />
+						<xs:attribute name="dtoName" type="tns:javaIdentifier" use="optional" />
+						<xs:attribute name="parent" type="tns:javaType" use="optional" />
+						<xs:attribute name="package" type="tns:javaPackage" use="required" />
+						<xs:attribute name="entityPackage" type="tns:javaPackage" use="required" />
+						<xs:attribute name="genFIC" type="xs:boolean" use="optional" default="true" />
+						<xs:attribute name="FICParent" type="tns:javaType" use="optional" />
+						<xs:attribute name="fieldInfoContextName" type="tns:javaIdentifier" use="optional" />
+						<xs:attribute name="extentKey" type="xs:token" use="optional" />
+					</xs:complexType>
+				</xs:element>
+				
+				
+				<xs:element name="resource">
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded" >
+							<xs:element name="extent" type="tns:Extent" />
+						</xs:choice>
+						
+						<xs:attribute name="name" type="tns:javaIdentifier" use="optional" />
+						<xs:attribute name="resourceName" type="tns:javaIdentifier" use="optional" />
+						<xs:attribute name="entityName" type="tns:javaIdentifier" use="optional" />
+						
+						<xs:attribute name="package" type="tns:javaPackage" use="required" />
+						<xs:attribute name="entityPackage" type="tns:javaPackage" use="required" />
+						
+						<xs:attribute name="parent" type="tns:javaType" use="optional" />
+						
+						<xs:attribute name="resourcePath" type="xs:string" use="optional" />
+						<xs:attribute name="entityMgr" type="tns:javaType" use="optional" />
+						<xs:attribute name="bundlePrefix" type="xs:string" use="optional" />
+						<xs:attribute name="fullDto" type="tns:javaType" use="optional" />
+						<xs:attribute name="featureEntityName" type="xs:string" use="optional" />
+						
+						<xs:attribute name="swagger" use="optional" >
+							<xs:annotation>
+								<xs:documentation>specifies if the swagger api codes should be generated.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType >
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="enabled" >
+										<xs:annotation>
+											<xs:documentation>The generation is enabled.</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="disabled" >
+										<xs:annotation>
+											<xs:documentation>The generation is disabled.</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

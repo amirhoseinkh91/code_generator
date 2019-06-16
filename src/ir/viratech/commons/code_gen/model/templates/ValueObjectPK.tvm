@@ -1,0 +1,13 @@
+:Description=
+:ResourceType=C
+-
+package ${package};
+
+${snippet.ValueObjectPKImports}
+
+${snippet.ValueObjectPKClassDefinition}
+
+$!{constructor}
+
+$!{snippet.ValueObjectPKCustomContents}
+}

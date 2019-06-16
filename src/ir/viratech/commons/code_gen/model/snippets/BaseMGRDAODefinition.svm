@@ -1,0 +1,7 @@
+
+	private ${class.DAOClassName} ${class.DAOVarName} = ${class.DAOClassName}.getInstance();	
+
+	@Override
+	protected ${class.DAOClassName} getDAO() {
+		return ${class.DAOVarName};
+	}

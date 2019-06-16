@@ -1,0 +1,15 @@
+#if (!$class.isSubclass())
+	
+	protected String toStringData() {
+#if ($class.Id && $class.Id.hasExternalClass())
+		return "$!{class.Id.Property.Name}: " + this.${class.Id.Property.GetterName}();
+#else
+		return "";
+#end
+	}
+	
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + "{" + this.toStringData() + "}";
+	}
+#end

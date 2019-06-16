@@ -1,0 +1,17 @@
+#if ($prop.get("field-description", true))
+	/**
+$!{prop.getJavaDoc("field-description", "	 ")}
+	 */
+#else
+	/**
+	 * Getter for "${prop.VarName}".
+#if ($prop.Column)
+	 * column= ${prop.Column}
+#end
+	 *
+	 * @return the value of ${prop.VarName}
+	 */
+#end
+	$!{prop.ScopeGet} ${prop.AbsoluteSignatureClassName}$!{prop.GenericMarker} ${prop.GetterName}() {
+		return this.${prop.VarName};
+	}

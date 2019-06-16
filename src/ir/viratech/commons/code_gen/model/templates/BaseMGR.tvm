@@ -1,0 +1,20 @@
+:Description=
+:ResourceType=C
+-
+package ${package};
+
+${snippet.BaseMGRImports}
+
+${snippet.BaseMGRClassComments}
+${snippet.BaseMGRClassDefinition}
+
+${snippet.BaseMGRDAODefinition}
+
+${snippet.BaseMGRClassConstructors}
+
+${snippet.BaseMGRInstanceMethod}
+
+${snippet.BaseMGRDAOMethods}
+
+${snippet.BaseMGRCustomContents}
+}

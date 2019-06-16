@@ -1,0 +1,5 @@
+:Description=The import statements for the base MGR
+-
+
+import ${class.AbsoluteValueObjectClassName};
+import ${class.AbsoluteDAOClassName};

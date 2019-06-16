@@ -1,0 +1,13 @@
+:Description=
+:ResourceType=C
+-
+package ${package};
+
+${snippet.RootDAOImports}
+
+${snippet.RootDAOClassComments}
+${snippet.RootDAOClassDefinition}
+
+${snippet.RootDAOClassConstructors}
+
+}

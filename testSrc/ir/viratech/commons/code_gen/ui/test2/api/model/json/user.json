@@ -1,0 +1,59 @@
+{
+  "path" : "user",
+  "key" : "user",
+  "featureName" : "USER",
+  "properties" : {
+    "username" : {
+      "label" : "username",
+      "type" : "string",
+      "multiple" : false,
+      "required" : true,
+      "searchable" : true,
+      "searchLevel" : 1
+    },
+    "password" : {
+      "label" : "password",
+      "type" : "string",
+      "widget" : "password",
+      "multiple" : false,
+      "required" : false,
+      "searchable" : false,
+      "searchLevel" : 0
+    },
+    "enabled" : {
+      "label" : "enabled",
+      "type" : "bool",
+      "multiple" : false,
+      "required" : false,
+      "searchable" : true,
+      "searchLevel" : 1
+    },
+    "firstName" : {
+      "label" : "firstName",
+      "type" : "string",
+      "multiple" : false,
+      "required" : false,
+      "searchable" : true,
+      "searchLevel" : 2
+    },
+    "lastName" : {
+      "label" : "lastName",
+      "type" : "string",
+      "multiple" : false,
+      "required" : true,
+      "searchable" : true,
+      "searchLevel" : 1
+    },
+    "roles" : {
+      "label" : "roles",
+      "type" : "string",
+      "multiple" : false,
+      "required" : false,
+      "searchable" : true,
+      "searchLevel" : 1
+    }
+  },
+  "extents" : {
+    "list" : [ "username", "password", "firstName", "lastName", "roles" ]
+  }
+}

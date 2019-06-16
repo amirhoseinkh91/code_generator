@@ -1,0 +1,130 @@
+	/**
+	 * Setter for property "${prop.VarName}".
+#if ($prop.Column)
+	 * column= ${prop.Column}
+#end
+	 *
+	 * @param ${prop.VarName} the new value for ${prop.VarName}
+	 */
+	$!{prop.ScopeSet} void ${prop.SetterName}(${prop.AbsoluteSignatureClassName}$!{prop.GenericMarker} ${prop.VarName}) {
+		this.${prop.VarName} = ${prop.VarName};
+#if ($prop.isAlternateKey())
+		this.hashCode_ = Integer.MIN_VALUE;
+#end
+	}
+#if ($prop.isCollectionOrMap() && $prop.hasChildClassTypes())
+	/**
+	 * Gets ${prop.VarName}, and creates and sets a new instance if it is null.
+	 *
+	 * @return the value of property ${prop.VarName}
+	 */
+	$!{prop.ScopeSet} ${prop.AbsoluteSignatureClassName}$!{prop.GenericMarker} ${prop.CreatedGetterName}() {
+		if (null == ${prop.GetterName}()) this.${prop.SetterName}(new ${prop.AbsoluteImplementationClassName}$!{prop.GenericMarker}());
+		return this.${prop.GetterName}();
+	}
+#end
+#if ($prop.isCollection() && $prop.hasChildClassTypes())
+	
+	/**
+	 * Adds a member to "${prop.VarName}".
+	 * It creates the collection if it is null.
+	 *
+	 * @param ${prop.getChildClassVariableName()} the new member to be added
+	 */
+	$!{prop.ScopeSet} void addTo${prop.Name_firstLetterUpper}(${prop.getChildClassAbsoluteName()} ${prop.getChildClassVariableName()}) {
+		this.${prop.CreatedGetterName}().add(${prop.getChildClassVariableName()});
+	}
+	
+	/**
+	 * Adds a member to "${prop.VarName}".
+	 * It creates the collection if it is null.
+	 *
+	 * @param ${prop.getChildClassVariableName()} the new member to be added
+	 * @deprecated Use {@link #addTo${prop.Name_firstLetterUpper}(${prop.getChildClassAbsoluteName()})} instead.
+	 */
+	@Deprecated
+	$!{prop.ScopeSet} final void addTo${prop.Name}(${prop.getChildClassAbsoluteName()} ${prop.getChildClassVariableName()}) {
+		this.addTo${prop.Name_firstLetterUpper}(${prop.getChildClassVariableName()});
+	}
+	
+	/**
+	 * Removes a member from "${prop.VarName}".
+	 * It does nothing if the collection is null.
+	 *
+	 * @param ${prop.getChildClassVariableName()} the member to be removed
+	 */
+	$!{prop.ScopeSet} void removeFrom${prop.Name_firstLetterUpper}(${prop.getChildClassAbsoluteName()} ${prop.getChildClassVariableName()}) {
+		if (null != this.${prop.GetterName}()) {
+			this.${prop.GetterName}().remove(${prop.getChildClassVariableName()});
+		}
+	}
+#if ($prop.ReverseProperty)
+	
+	/**
+	 * Adds a member to "${prop.VarName}" and synchronizes the reverse association.
+	 *
+	 * @param ${prop.getChildClassVariableName()} the new member to be added
+	 */
+	$!{prop.ScopeSet} void addTo${prop.Name_firstLetterUpper}_AndReverse(${prop.getChildClassAbsoluteName()} ${prop.getChildClassVariableName()}) {
+		this.addTo${prop.Name_firstLetterUpper}(${prop.getChildClassVariableName()});
+#if ($prop.isOneToMany())
+		${prop.getChildClassVariableName()}.${prop.ReverseProperty.SetterName}((${class.AbsoluteValueObjectSignatureClassName})this);
+#end
+#if ($prop.isManyToMany())
+		${prop.getChildClassVariableName()}.addTo${prop.ReverseProperty.Name_firstLetterUpper}((${class.AbsoluteValueObjectSignatureClassName})this);
+#end
+	}
+	
+	/**
+	 * Removes a member from "${prop.VarName}" and synchronizes the reverse association.
+	 *
+	 * @param ${prop.getChildClassVariableName()} the member to be removed
+	 */
+	$!{prop.ScopeSet} void removeFrom${prop.Name_firstLetterUpper}_AndReverse(${prop.getChildClassAbsoluteName()} ${prop.getChildClassVariableName()}) {
+		this.removeFrom${prop.Name_firstLetterUpper}(${prop.getChildClassVariableName()});
+#if ($prop.isOneToMany())
+		${prop.getChildClassVariableName()}.${prop.ReverseProperty.SetterName}(null);
+#end
+#if ($prop.isManyToMany())
+		${prop.getChildClassVariableName()}.removeFrom${prop.ReverseProperty.Name_firstLetterUpper}((${class.AbsoluteValueObjectSignatureClassName})this);
+#end
+	}
+#end
+#end
+#if ($prop.isMap() && $prop.hasChildClassTypes())
+	
+	/**
+	 * Adds a key-value to map "${prop.VarName}".
+	 * It creates the map if it is null.
+	 *
+	 * @param key the new key to be added
+	 * @param value the new value to be added
+	 */
+	$!{prop.ScopeSet} ${prop.MapValueType} addTo${prop.Name_firstLetterUpper}(${prop.MapKeyType} key, ${prop.MapValueType} value) {
+		return this.${prop.CreatedGetterName}().put(key, value);
+	}
+	
+	/**
+	 * Gets the value of a key from "${prop.VarName}".
+	 * It prevents NullPointerException if it is null.
+	 *
+	 * @param key the key to be searched in 
+	 * @return the value associated with the given key
+	 */
+	$!{prop.ScopeSet} ${prop.MapValueType} getFrom${prop.Name_firstLetterUpper}(${prop.MapKeyType} key) {
+		${prop.AbsoluteSignatureClassName}$!{prop.GenericMarker} ${prop.VarName} = this.${prop.GetterName}();
+		return (${prop.VarName} == null) ? null : ${prop.VarName}.get(key);
+	}
+	
+	/**
+	 * Removes a key from "${prop.VarName}".
+	 * It does nothing if the map is null.
+	 *
+	 * @param key the key to be removed
+	 */
+	$!{prop.ScopeSet} void removeFrom${prop.Name_firstLetterUpper}(${prop.MapKeyType} key) {
+		if (null != this.${prop.GetterName}()) {
+			this.${prop.GetterName}().remove(key);
+		}
+	}
+#end

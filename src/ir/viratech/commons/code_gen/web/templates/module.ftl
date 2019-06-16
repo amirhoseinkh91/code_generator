@@ -1,0 +1,1 @@
+angular.module('ManagementModule', [<#list schemaNameList as schemaName>'${schemaName}Module'<#if schemaName_has_next>,</#if></#list>]);

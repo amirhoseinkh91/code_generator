@@ -1,0 +1,12 @@
+	/// Singleton
+	private static ${class.DAOPackage}.${class.DAOClassName} instance = null;
+	private static synchronized void createInstance() {
+		if (null == instance) instance = new ${class.DAOPackage}.${class.DAOClassName}();
+	}
+	/**
+	 * Return a singleton of the DAO
+	 */
+	public static ${class.DAOPackage}.${class.DAOClassName} getInstance() {
+		if (null == instance) createInstance();
+		return instance;
+	}

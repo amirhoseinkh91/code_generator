@@ -1,0 +1,14 @@
+:Description=
+:ResourceType=C
+-
+package ${package};
+
+${snippet.MGRImports}
+
+${snippet.MGRClassComments}
+${snippet.MGRClassDefinition}
+
+${snippet.MGRClassConstructors}
+
+$!{snippet.MGRCustomContents}
+}

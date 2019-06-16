@@ -1,0 +1,25 @@
+	/** The constant referring the name of class "$!{class.ValueObjectClassName}". */
+	public static final String REF = "$!{class.ValueObjectClassName}";
+	
+#foreach ($prop in $class.AllProperties)
+	/** The constant referring the property "$!{prop.Name}". */
+	public static final String PROP_${prop.StaticName} = "$!{prop.Name}";
+	
+#end
+	
+	/** The name of table for this class. */
+	public static final String TABLE = "$!{class.TableName}";
+	
+#foreach ($prop in $class.AllProperties)
+#if ($prop.Column)
+	/** Name of column referring the property "$!{prop.Name}". */
+	public static final String PROPCOLUMN_${prop.StaticName} = "$!{prop.Column}";
+	
+#end
+#if ($prop.ChildTableName)
+	/** Name of table referring the property "$!{prop.Name}". */
+	public static final String PROPTABLE_${prop.StaticName} = "$!{prop.ChildTableName}";
+	
+#end
+#end
+	

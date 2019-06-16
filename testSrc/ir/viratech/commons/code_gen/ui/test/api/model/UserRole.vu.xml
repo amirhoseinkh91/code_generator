@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<uiModel 
+ 		xmlns="http://viraTech.ir/code_gen/ui/uiModel"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://viraTech.ir/code_gen/ui/uiModel
+				./uiModel.xsd "
+		>
+	<dto name="UserRole" 
+			genFIC="true"
+			entityPackage="ir.viratech.commons.code_gen.ui.test.model.user.role" 
+			package="ir.viratech.commons.code_gen.ui.test.api.user" >
+		<prop name="uid" internalName="extuid" save="disabled" />
+		<prop name="name" type="String" trackModif="true" />
+		<prop name="description" type="String" trackModif="true" client-widget="textarea"/>
+		
+		<prop-dto name="features"
+			internalName="featuresRelationMap"
+			internalType="ir.viratech.commons.util.relation_map.RelationMap&lt;ir.viratech.commons.code_gen.ui.test.model.user.Feature&gt;" 
+			type="ir.viratech.commons.api.dto.relation_map.DisplableRelationMapDTO&lt;ir.viratech.commons.code_gen.ui.test.model.user.Feature&gt;"
+			fieldInfo="disabled"
+			searchable="false"
+			load="hooked-dtoLoadFrom" 
+			save="hooked-dtoSaveTo-notNull"
+			trackModif="true" />
+		
+		
+	</dto>
+	
+	
+	<dto name="UserRole"
+			genFIC="true"
+			dtoName="UserRoleLightDTO"
+			entityPackage="ir.viratech.commons.code_gen.ui.test.model.user.role" 
+			package="ir.viratech.commons.code_gen.ui.test.api.user" >
+
+		<prop name="uid" internalName="extuid" save="disabled" />
+		<prop name="name" type="String" trackModif="true" />
+		<prop name="description" type="String" trackModif="true" client-widget="textarea"/>
+	</dto>
+</uiModel>

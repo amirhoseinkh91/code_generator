@@ -1,0 +1,11 @@
+#foreach ($entry in $prop.CustomProperties.entrySet())
+
+	/**
+	 * Getter for custom property "${prop.PropName}${entry.Key}".
+	 *
+	 * @return the value of ${prop.PropName}${entry.Key}
+	 */
+	public static String get${prop.PropName}${entry.Key} () {
+		return "${entry.Value}";
+	}
+#end

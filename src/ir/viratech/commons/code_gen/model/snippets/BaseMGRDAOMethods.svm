@@ -1,0 +1,28 @@
+#if ($class.ParentRoot.Id)
+	public ${class.ValueObjectClassName} get(${class.ParentRoot.Id.Property.AbsoluteSignatureClassName} key) {
+		return super.get(key);
+	}
+
+	public void delete(${class.ParentRoot.Id.Property.AbsoluteSignatureClassName} key) {
+		super.delete(key);
+	}
+	
+#if (${class.ParentRoot.Id.Property.AbsoluteSignatureClassName} == ${class.ParentRoot.Id.Property.ObjectClass})
+
+#else
+	public ${class.ValueObjectClassName} get(${class.ParentRoot.Id.Property.ObjectClass} key) {
+		return super.get(key);
+	}
+	
+	public void delete(${class.ParentRoot.Id.Property.ObjectClass} key) {
+		super.delete(key);
+	}
+
+#end
+
+	@Override
+	public ${class.ParentRoot.Id.Property.ObjectClass} add(${class.ValueObjectClassName} ${class.VarName}) {
+		return (${class.ParentRoot.Id.Property.ObjectClass}) super.add(${class.VarName});
+	}
+
+#end

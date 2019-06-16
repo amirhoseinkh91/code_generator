@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project >
+
+<!--
+ * Ant Build File
+ * 
+ * @author Kian Mirjalali
+-->
+
+<project name="ViraGenerator" basedir=".">
+
+    <property name="project.name" value="${ant.project.name}"/>
+    <property environment="env"/>
+    <property file="build.xml.properties"/>
+
+
+    <path id="compile.classpath">
+        <fileset dir="${jlibdir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean" description="Clean">
+        <delete includeemptydirs="true" failonerror="false">
+            <fileset dir="${build.base}" defaultexcludes="false">
+                <include name="**/*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="prepare">
+        <mkdir dir="${build.base}"/>
+        <mkdir dir="${build.temp}"/>
+        <mkdir dir="${jbindir}"/>
+    </target>
+
+    <target name="jcompile" depends="prepare"> <!-- description="Compile Java sources" -->
+        <javac destdir="${jbindir}" includeantruntime="false"
+               debug="false" optimize="true">
+            <src path="${jsourcedir}"/>
+            <classpath refid="compile.classpath"/>
+        </javac>
+    </target>
+
+    <target name="build" depends="jcompile" description="Build the complete directory for making the jar">
+        <copy todir="${jbindir}">
+            <fileset dir="${jsourcedir}" excludes="**/*.java"/>
+        </copy>
+        <fixcrlf fixlast="false" eol="unix" srcdir="${jbindir}" excludes="**/*.class"/>
+    </target>
+
+    <target name="refreshProject" if="eclipse.running">
+        <eclipse.convertPath fileSystemPath="${basedir}" property="projPath"/>
+        <eclipse.refreshLocal resource="${projPath}" depth="infinite"/>
+    </target>
+
+    <target name="createJar" depends="build" description="Build the jar file">
+        <jar destfile="${jarfile}" basedir="${jbindir}">
+            <manifest>
+                <!--attribute name="Main-Class" value="${jar.main.class}"/>
+                <attribute name="Class-Path" value="${jar.classPath}"/ -->
+                <attribute name="Specification-Title" value="${jar.manifest.specTitle}"/>
+                <attribute name="Specification-Vendor" value="${jar.manifest.specVendor}"/>
+                <attribute name="Specification-Version" value="${jar.manifest.specVersion}"/>
+                <attribute name="Implementation-Title" value="${jar.manifest.implTitle}"/>
+                <attribute name="Implementation-Vendor" value="${jar.manifest.implVendor}"/>
+                <attribute name="Implementation-Version" value="${jar.manifest.implVersion}"/>
+            </manifest>
+        </jar>
+        <antcall target="refreshProject"/>
+    </target>
+
+    <target name="test-GenerateUi" description="generate test ui classes" depends="build">
+        <java classname="ir.viratech.commons.code_gen.ui.UiGenerator" fork="true">
+            <classpath path="${jbindir}"/>
+            <classpath refid="compile.classpath"/>
+            <arg line=". ./testSrc/ir/viratech/commons/code_gen/ui/test/uiConfig.properties"/>
+        </java>
+        <antcall target="refreshProject"/>
+    </target>
+
+    <target name="test-GenerateWeb" description="generate test html and js files" depends="build">
+        <java classname="ir.viratech.commons.code_gen.web.WebGenerator" fork="true">
+            <classpath path="${jbindir}"/>
+            <classpath refid="compile.classpath"/>
+            <arg line=". ./testSrc/ir/viratech/commons/code_gen/ui/test2/uiConfig.properties"/>
+        </java>
+        <antcall target="refreshProject"/>
+    </target>
+
+    <target name="test-GenerateModel" description="generates model files" depends="build">
+        <java classname="ir.viratech.commons.code_gen.model.ModelGenerator" fork="true">
+            <classpath path="${jbindir}"/>
+            <classpath refid="compile.classpath"/>
+            <!--<arg line=". ./src/ir/viratech/commons/code_gen/model/config.properties"/>-->
+            <arg line=". ./src/ir/viratech/commons/code_gen/model"/>
+        </java>
+        <antcall target="refreshProject"/>
+    </target>
+
+
+</project>
+

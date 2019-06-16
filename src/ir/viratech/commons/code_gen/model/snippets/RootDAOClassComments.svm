@@ -1,0 +1,3 @@
+/**
+ * Root DAO class as a parent for other DAO objects.
+ */

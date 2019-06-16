@@ -1,0 +1,4 @@
+	/*
+	//The getInstance() method is used normally.
+	public ${class.MGRClassName} () {}
+	*/

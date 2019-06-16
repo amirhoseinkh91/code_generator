@@ -1,0 +1,15 @@
+#if (${class.needsInitialization()})
+	
+	@Override
+	public void initialize(${class.AbsoluteValueObjectSignatureClassName} ${class.VarName}) {
+#if ($class.isSubclass())
+		${class.Parent.AbsoluteDAOClassName}.getInstance().initialize(${class.VarName}); 
+#else
+		super.initialize(${class.VarName});
+#end
+#foreach ($prop in $class.PropertiesWithInitialization)
+		${class.VarName}.${prop.SetterName}(${prop.InitializationExpression});
+#end
+	}
+	
+#end

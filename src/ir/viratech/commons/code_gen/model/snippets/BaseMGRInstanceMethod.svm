@@ -1,0 +1,12 @@
+	/// Singleton
+	private static ${class.AbsoluteMGRClassName} instance = null;
+	private static synchronized void createInstance() {
+		if (null == instance) instance = new ${class.AbsoluteMGRClassName}();
+	}
+	/**
+	 * Return a singleton of the MGR
+	 */
+	public static ${class.AbsoluteMGRClassName} getInstance() {
+		if (null == instance) createInstance();
+		return instance;
+	}

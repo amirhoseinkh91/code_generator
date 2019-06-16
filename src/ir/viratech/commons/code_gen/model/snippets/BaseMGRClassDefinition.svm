@@ -1,0 +1,1 @@
+public abstract class ${class.BaseMGRClassName} extends ${class.AbsoluteRootMGRClassName}<${class.ValueObjectClassName}> {
