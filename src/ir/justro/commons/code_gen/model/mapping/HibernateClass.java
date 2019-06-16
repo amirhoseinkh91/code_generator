@@ -33,6 +33,7 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 
 	private HibernateDocument document;
 	private HibernateClass parent;
+	private String moduleName;
 	private String packageName;
 	private String proxy;
 	private String tableName;
@@ -60,7 +61,7 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 	private String absoluteRootMGRClassName;
 	//private String rootDAOClassName;
 	//private String absoluteRootDAOClassName;
-	
+
 	private boolean syncDAO = true;
 	private boolean syncValueObject = true;
 	private boolean syncCustom = true;
@@ -121,6 +122,9 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 			}
 			if (attNode.getNodeName().equals("proxy")) {
 				proxy = attNode.getNodeValue();
+			}
+			if (attNode.getNodeName().equals("module")) {
+				moduleName = attNode.getNodeValue();
 			}
 			else if ((type == TYPE_CLASS || type == TYPE_JOINED_SUBCLASS || type == TYPE_UNION_SUBCLASS || type == TYPE_SUBCLASS)  
 					&& attNode.getNodeName().equals("name")) {
@@ -1024,4 +1028,17 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 			prop.postProcess();
 		}
 	}
+
+	public String getDAOModuleName() {
+		return this.moduleName + ".dao";
+	}
+
+	public String getMGRModuleName() {
+		return this.moduleName + ".logic";
+	}
+
+	public String getModelModuleName() {
+		return this.moduleName + ".model";
+	}
+
 }

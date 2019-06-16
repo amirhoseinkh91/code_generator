@@ -9,7 +9,7 @@ import java.io.File;
 public class ModelGenerationConfiguration extends HSConfiguration {
 	
 	private File configurationDirectory;
-	
+
 	/**
 	 * Provides the configuration directory
 	 * @return the configuration directory
@@ -35,7 +35,9 @@ public class ModelGenerationConfiguration extends HSConfiguration {
 		return this.getProjectFile(this.getOutputSourceFolderName());
 	}
 
-
+	public boolean isModularProject() {
+		return getBooleanProperty(Constants.PROP_USE_MODULAR_GENERATION,false);
+	}
 
 	private ModelGenerationConfiguration(String projectDirectory) {
 		super(projectDirectory);

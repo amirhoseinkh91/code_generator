@@ -26,7 +26,7 @@ public class ModelGenerator {
 			logger.error("", e);
 			return;
 		}
-		List<HibernateDocument> documents = new ArrayList<HibernateDocument>();
+		List<HibernateDocument> documents = new ArrayList<>();
 		for (File file : hbmFiles) {
 			HibernateDocument doc = hibernateMappingManager.getHibernateDocument(file);
 			if (null != doc) {

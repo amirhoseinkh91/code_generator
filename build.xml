@@ -7,7 +7,7 @@
  * @author Amir H. Khalouei
 -->
 
-<project name="CodeGenerator" basedir=".">
+<project name="ViraGenerator" basedir=".">
 
     <property name="project.name" value="${ant.project.name}"/>
     <property environment="env"/>
@@ -71,29 +71,29 @@
     </target>
 
     <target name="test-GenerateUi" description="generate test ui classes" depends="build">
-        <java classname="ir.viratech.commons.code_gen.ui.UiGenerator" fork="true">
+        <java classname="ir.justro.commons.code_gen.ui.UiGenerator" fork="true">
             <classpath path="${jbindir}"/>
             <classpath refid="compile.classpath"/>
-            <arg line=". ./testSrc/ir/viratech/commons/code_gen/ui/test/uiConfig.properties"/>
+            <arg line=". ./testSrc/ir/justro/commons/code_gen/ui/test/uiConfig.properties"/>
         </java>
         <antcall target="refreshProject"/>
     </target>
 
     <target name="test-GenerateWeb" description="generate test html and js files" depends="build">
-        <java classname="ir.viratech.commons.code_gen.web.WebGenerator" fork="true">
+        <java classname="ir.justro.commons.code_gen.web.WebGenerator" fork="true">
             <classpath path="${jbindir}"/>
             <classpath refid="compile.classpath"/>
-            <arg line=". ./testSrc/ir/viratech/commons/code_gen/ui/test2/uiConfig.properties"/>
+            <arg line=". ./testSrc/ir/justro/commons/code_gen/ui/test2/uiConfig.properties"/>
         </java>
         <antcall target="refreshProject"/>
     </target>
 
     <target name="test-GenerateModel" description="generates model files" depends="build">
-        <java classname="ir.viratech.commons.code_gen.model.ModelGenerator" fork="true">
+        <java classname="ir.justro.commons.code_gen.model.ModelGenerator" fork="true">
             <classpath path="${jbindir}"/>
             <classpath refid="compile.classpath"/>
             <!--<arg line=". ./src/ir/viratech/commons/code_gen/model/config.properties"/>-->
-            <arg line=". ./src/ir/viratech/commons/code_gen/model"/>
+            <arg line=". ./src/ir/justro/commons/code_gen/model/config"/>
         </java>
         <antcall target="refreshProject"/>
     </target>

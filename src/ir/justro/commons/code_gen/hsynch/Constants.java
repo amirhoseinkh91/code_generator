@@ -54,6 +54,8 @@ public class Constants {
 	public static final String EXTENSION_TEMPLATE = ".tvm";
 	public static final String EXTENSION_HBM = ".hbm.xml";
 
+	public static final String PROP_USE_MODULAR_GENERATION = "useModularGeneration";
+
 	public static VelocityEngine templateGenerator;
 
 	static {
