@@ -252,7 +252,7 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 	 */
 	public String getValueObjectClassName() {
 		if (null != absoluteValueObjectClassName) {
-			return ir.viratech.commons.code_gen.model.util.HSUtil.getClassPart(absoluteValueObjectClassName);
+			return ir.justro.commons.code_gen.model.util.HSUtil.getClassPart(absoluteValueObjectClassName);
 		}
 		else {
 			return null;
@@ -293,7 +293,7 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 	public String getValueObjectSignatureClassName() {
 		String absoluteSignatureClassName = getAbsoluteValueObjectSignatureClassName();
 		if (null != absoluteSignatureClassName) {
-			return ir.viratech.commons.code_gen.model.util.HSUtil.getClassPart(absoluteSignatureClassName);
+			return ir.justro.commons.code_gen.model.util.HSUtil.getClassPart(absoluteSignatureClassName);
 		}
 		else {
 			return null;
@@ -525,11 +525,11 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 	 */
 	public String getLabel() {
 		if (getCustomProperties().size() == 0)
-			return ir.viratech.commons.code_gen.model.util.HSUtil.getPropDescription(getValueObjectClassName());
+			return ir.justro.commons.code_gen.model.util.HSUtil.getPropDescription(getValueObjectClassName());
 		else {
 			String label = get(IHibernateClassProperty.LABEL_METADATA);
 			if (null == label)
-				return ir.viratech.commons.code_gen.model.util.HSUtil.getPropDescription(getValueObjectClassName());
+				return ir.justro.commons.code_gen.model.util.HSUtil.getPropDescription(getValueObjectClassName());
 			else
 				return label;
 		}
@@ -539,14 +539,14 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 	 * Return the variable name related to this class that will be used for the generation
 	 */
 	public String getVarName () {
-		return ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterLower(getValueObjectClassName());
+		return ir.justro.commons.code_gen.model.util.HSUtil.firstLetterLower(getValueObjectClassName());
 	}
 
 	/**
 	 * Return the variable name related to DAO this class that will be used for the generation
 	 */
 	public String getDAOVarName () {
-		return ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterLower(getDAOClassName());
+		return ir.justro.commons.code_gen.model.util.HSUtil.firstLetterLower(getDAOClassName());
 	}
 
 	/**
@@ -852,36 +852,36 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 					if (getId().isComposite()) {
 						for (Iterator<HibernateClassProperty> i=getId().getProperties().iterator(); i.hasNext(); ) {
 							HibernateClassProperty hcp = i.next();
-							values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
+							values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
 						}
 					}
 				} else {
 					if (!getId().isComposite() || getId().hasExternalClass()) {
-						values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(getId().getProperty().getName()), getId().getProperty());
+						values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(getId().getProperty().getName()), getId().getProperty());
 					}
 				}
 			}
 			for (Iterator<HibernateClassProperty> i=getProperties().iterator(); i.hasNext(); ) {
 				HibernateClassProperty hcp = i.next();
-				values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
+				values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
 			}
 			for (Iterator<HibernateClassProperty> i=getManyToOneList().iterator(); i.hasNext(); ) {
 				HibernateClassProperty hcp = i.next();
-				values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
+				values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
 			}
 			for (Iterator<HibernateClassProperty> i=getOneToOneList().iterator(); i.hasNext(); ) {
 				HibernateClassProperty hcp = i.next();
-				values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
+				values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
 			}
 			for (Iterator<HibernateClassCollectionProperty> i=getCollectionList().iterator(); i.hasNext(); ) {
 				HibernateClassProperty hcp = i.next();
-				values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
+				values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
 			}
 			for (Iterator<HibernateComponentClass> i=getComponentList().iterator(); i.hasNext(); ) {
 				HibernateComponentClass hcc = i.next();
 				for (Iterator<HibernateClassProperty> i1=hcc.getProperties().iterator(); i1.hasNext(); ) {
 				    HibernateClassProperty hcp = i1.next();
-				    values.put(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
+				    values.put(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(hcp.getName()), hcp);
 				}
 			}
 			if (addCompositeKeyProperties) allPropertiesWithComposite = values;
@@ -896,7 +896,7 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
 	public IHibernateClassProperty getProperty(String propName) {
 		if (null == propName) return null;
 		getAllProperties();
-		return (IHibernateClassProperty) allProperties.get(ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(propName));
+		return (IHibernateClassProperty) allProperties.get(ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(propName));
 	}
 	
 	public boolean needsInitialization() {
