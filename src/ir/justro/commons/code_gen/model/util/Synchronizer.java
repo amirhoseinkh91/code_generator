@@ -257,14 +257,14 @@ public class Synchronizer {
                 if (!hcc.isDynamic()) {
                     Context context2 = createContextWithSingleParam(context, PARAM_CLASS, hcc);
                     generateClassFile(TEMPLATE_BASE_VALUE_OBJECT, context2, hcc.getModelModuleName(), hcc.getBaseValueObjectPackage(), hcc.getBaseValueObjectClassName(), true);
-                    generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, context2, hc.getModelModuleName(), hcc.getValueObjectPackage(), hcc.getClassName());
+                    generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, context2, hcc.getModelModuleName(), hcc.getValueObjectPackage(), hcc.getClassName());
                 }
             }
             for (HibernateClassCollectionProperty hccp : hc.getCollectionList()) {
                 for (HibernateComponentClass chc : hccp.getCompositeList()) {
                     Context context2 = createContextWithSingleParam(context, PARAM_CLASS, chc);
                     generateClassFile(TEMPLATE_BASE_VALUE_OBJECT, context2, chc.getModelModuleName(), chc.getBaseValueObjectPackage(), chc.getBaseValueObjectClassName(), true);
-                    generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, context2, hc.getModelModuleName(), chc.getValueObjectPackage(), chc.getClassName());
+                    generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, context2, chc.getModelModuleName(), chc.getValueObjectPackage(), chc.getClassName());
                 }
             }
 
