@@ -1,2 +1,9 @@
 build
 bin
+.classpath
+.project
+velocity.log
+ViraGenerator.iml
+.idea/**/*
+.settings/**/*
+WebDraft/**/*
