@@ -1,6 +1,6 @@
 package ir.justro.commons.code_gen.model.resource;
 
-import ir.viratech.commons.code_gen.hsynch.Constants;
+import ir.justro.commons.code_gen.hsynch.Constants;
 
 import java.util.Properties;
 
@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class Snippet extends AbstractResource {
 	/**
-	 * @see ir.viratech.commons.code_gen.model.resource.AbstractResource#evaluateMetaData(java.util.Properties)
+	 * @see ir.justro.commons.code_gen.model.resource.AbstractResource#evaluateMetaData(java.util.Properties)
 	 */
 	protected void evaluateMetaData(Properties properties) {
 	}

@@ -2,8 +2,8 @@ package ir.justro.commons.code_gen.model.mapping;
 
 import ir.justro.commons.code_gen.model.exception.HibernateDocumentLoadException;
 import ir.justro.commons.code_gen.model.exception.HibernateSynchronizerException;
-import ir.viratech.commons.code_gen.model.util.HibernateDOMParser;
-import ir.viratech.commons.code_gen.model.util.XmlUtil;
+import ir.justro.commons.code_gen.model.util.HibernateDOMParser;
+import ir.justro.commons.code_gen.model.util.XmlUtil;
 
 import java.io.File;
 import java.io.FileInputStream;

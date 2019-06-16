@@ -1,9 +1,9 @@
 package ir.justro.commons.code_gen.model.resource;
 
-import ir.viratech.commons.code_gen.hsynch.Constants;
-import ir.viratech.commons.code_gen.model.ModelGenerationConfigurationHolder;
-import ir.viratech.commons.code_gen.model.util.HSUtil;
-import ir.viratech.commons.code_gen.model.util.Synchronizer;
+import ir.justro.commons.code_gen.hsynch.Constants;
+import ir.justro.commons.code_gen.model.ModelGenerationConfigurationHolder;
+import ir.justro.commons.code_gen.model.util.HSUtil;
+import ir.justro.commons.code_gen.model.util.Synchronizer;
 
 import java.io.File;
 import java.io.IOException;

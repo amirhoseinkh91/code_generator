@@ -1,7 +1,7 @@
 package ir.justro.commons.code_gen.model.resource;
 
-import ir.viratech.commons.code_gen.hsynch.Constants;
-import ir.viratech.commons.code_gen.model.util.HSUtil;
+import ir.justro.commons.code_gen.hsynch.Constants;
+import ir.justro.commons.code_gen.model.util.HSUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

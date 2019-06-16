@@ -5,7 +5,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
-import ir.viratech.commons.code_gen.ui.model.xml.UiGenerationXmlConfiguration;
+import ir.justro.commons.code_gen.ui.model.xml.UiGenerationXmlConfiguration;
 
 import java.io.File;
 import java.io.FileWriter;

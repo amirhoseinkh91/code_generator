@@ -1,15 +1,15 @@
 package ir.justro.commons.code_gen.ui.model.xml;
 
 import ir.viratech.commons.api.search.field.types.FieldInfo_String;
-import ir.viratech.commons.code_gen.ui.UiXmlSchemaProvider;
-import ir.viratech.commons.code_gen.ui.model.AbstractDtoPropertyModel;
-import ir.viratech.commons.code_gen.ui.model.DtoModel;
-import ir.viratech.commons.code_gen.ui.model.DtoPropertyModel_Dto;
-import ir.viratech.commons.code_gen.ui.model.DtoPropertyModel_Primitive;
-import ir.viratech.commons.code_gen.ui.model.ResourceModel;
-import ir.viratech.commons.code_gen.ui.model.TypesUtil;
-import ir.viratech.commons.code_gen.ui.model.UiGenerationModel;
-import ir.viratech.commons.code_gen.util.GenerationConfiguration;
+import ir.justro.commons.code_gen.ui.UiXmlSchemaProvider;
+import ir.justro.commons.code_gen.ui.model.AbstractDtoPropertyModel;
+import ir.justro.commons.code_gen.ui.model.DtoModel;
+import ir.justro.commons.code_gen.ui.model.DtoPropertyModel_Dto;
+import ir.justro.commons.code_gen.ui.model.DtoPropertyModel_Primitive;
+import ir.justro.commons.code_gen.ui.model.ResourceModel;
+import ir.justro.commons.code_gen.ui.model.TypesUtil;
+import ir.justro.commons.code_gen.ui.model.UiGenerationModel;
+import ir.justro.commons.code_gen.util.GenerationConfiguration;
 
 import java.io.File;
 import java.io.FileInputStream;

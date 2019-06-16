@@ -1,7 +1,7 @@
 package ir.justro.commons.code_gen.test;
 
-import ir.viratech.commons.code_gen.model.resource.ResourceManager;
-import ir.viratech.commons.code_gen.model.util.HSUtil;
+import ir.justro.commons.code_gen.model.resource.ResourceManager;
+import ir.justro.commons.code_gen.model.util.HSUtil;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;

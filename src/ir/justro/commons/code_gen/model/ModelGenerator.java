@@ -1,9 +1,9 @@
 package ir.justro.commons.code_gen.model;
 
 import ir.justro.commons.code_gen.model.exception.HibernateDocumentLoadException;
-import ir.viratech.commons.code_gen.model.mapping.HibernateDocument;
-import ir.viratech.commons.code_gen.model.mapping.HibernateMappingManager;
-import ir.viratech.commons.code_gen.model.util.Synchronizer;
+import ir.justro.commons.code_gen.model.mapping.HibernateDocument;
+import ir.justro.commons.code_gen.model.mapping.HibernateMappingManager;
+import ir.justro.commons.code_gen.model.util.Synchronizer;
 
 import java.io.File;
 import java.util.ArrayList;

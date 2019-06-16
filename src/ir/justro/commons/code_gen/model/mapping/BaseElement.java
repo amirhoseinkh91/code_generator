@@ -1,7 +1,7 @@
 package ir.justro.commons.code_gen.model.mapping;
 
-import ir.viratech.commons.code_gen.model.util.HSUtil;
-import ir.viratech.commons.code_gen.model.util.XmlUtil;
+import ir.justro.commons.code_gen.model.util.HSUtil;
+import ir.justro.commons.code_gen.model.util.XmlUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -3,8 +3,8 @@ package ir.justro.commons.code_gen.model.mapping;
 
 import ir.justro.commons.code_gen.model.exception.AttributeNotSpecifiedException;
 import ir.justro.commons.code_gen.model.exception.TransientPropertyException;
-import ir.viratech.commons.code_gen.model.util.HSUtil;
-import ir.viratech.commons.code_gen.model.util.XmlUtil;
+import ir.justro.commons.code_gen.model.util.HSUtil;
+import ir.justro.commons.code_gen.model.util.XmlUtil;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -364,7 +364,7 @@ public class HibernateClassProperty extends BaseElement implements Comparable<Hi
 	}
 	
 	public String getName_firstLetterUpper() {
-		return ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(getName());
+		return ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(getName());
 	}
 	
 	/**
@@ -372,11 +372,11 @@ public class HibernateClassProperty extends BaseElement implements Comparable<Hi
 	 */
 	public String getLabel() {
 		if (getCustomProperties().size() == 0)
-			return ir.viratech.commons.code_gen.model.util.HSUtil.getPropDescription(getName());
+			return ir.justro.commons.code_gen.model.util.HSUtil.getPropDescription(getName());
 		else {
 			String label = get(IHibernateClassProperty.LABEL_METADATA);
 			if (null == label)
-				return ir.viratech.commons.code_gen.model.util.HSUtil.getPropDescription(getName());
+				return ir.justro.commons.code_gen.model.util.HSUtil.getPropDescription(getName());
 			else
 				return label;
 		}
@@ -386,7 +386,7 @@ public class HibernateClassProperty extends BaseElement implements Comparable<Hi
 	 * Return the actual property name for this property (first letter upper case)
 	 */
 	public String getPropName() {
-		return ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterUpper(getName());
+		return ir.justro.commons.code_gen.model.util.HSUtil.firstLetterUpper(getName());
 	}
 
 	/**
@@ -412,8 +412,8 @@ public class HibernateClassProperty extends BaseElement implements Comparable<Hi
 	}
 
 	public static String getVarName(String name) {
-		if (null == reservedVarNames.get(name.toLowerCase())) return ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterLower(name);
-		else return "m_" + ir.viratech.commons.code_gen.model.util.HSUtil.firstLetterLower(name);
+		if (null == reservedVarNames.get(name.toLowerCase())) return ir.justro.commons.code_gen.model.util.HSUtil.firstLetterLower(name);
+		else return "m_" + ir.justro.commons.code_gen.model.util.HSUtil.firstLetterLower(name);
 	}
 	
 	/**
@@ -480,7 +480,7 @@ public class HibernateClassProperty extends BaseElement implements Comparable<Hi
 	 * Return the name of the class without the the package prefix that represents this property
 	 */
 	public String getClassName () {
-		return ir.viratech.commons.code_gen.model.util.HSUtil.getClassPart(getAbsoluteClassName());
+		return ir.justro.commons.code_gen.model.util.HSUtil.getClassPart(getAbsoluteClassName());
 	}
 
 	/**
@@ -586,7 +586,7 @@ public class HibernateClassProperty extends BaseElement implements Comparable<Hi
 	 * @return
 	 */
 	public String getStaticName () {
-		return ir.viratech.commons.code_gen.model.util.HSUtil.getStaticName(name);
+		return ir.justro.commons.code_gen.model.util.HSUtil.getStaticName(name);
 	}
 
 	/**

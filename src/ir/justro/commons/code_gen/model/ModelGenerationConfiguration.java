@@ -1,6 +1,6 @@
 package ir.justro.commons.code_gen.model;
 
-import ir.viratech.commons.code_gen.hsynch.Constants;
+import ir.justro.commons.code_gen.hsynch.Constants;
 import ir.justro.commons.code_gen.hsynch.HSConfiguration;
 
 import java.io.File;

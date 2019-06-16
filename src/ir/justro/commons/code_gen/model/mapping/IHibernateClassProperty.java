@@ -3,79 +3,79 @@ package ir.justro.commons.code_gen.model.mapping;
 
 public interface IHibernateClassProperty {
 
-	public static final String LABEL_METADATA = "label";
+	String LABEL_METADATA = "label";
 	
-	public void postProcess();
+	void postProcess();
 	
 	/**
 	 * Return the defined property name for this property
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Return a descriptive label based on the property name
 	 */
-	public String getLabel();
+	String getLabel();
 	
 	/**
 	 * Return the actual property name for this property (first letter upper case)
 	 */
-	public String getPropName();
+	String getPropName();
 
 	/**
 	 * Return the getter name (without the parenthesis) for this property
 	 * @return the getter name
 	 */
-	public String getGetterName();
+	String getGetterName();
 
 	/**
 	 * Return the setter name (without the parenthesis) for this property
 	 * @return the setter name
 	 */
-	public String getSetterName();
+	String getSetterName();
 
 	/**
 	 * Return the name used as the Java variable name for this property (first letter lower case)
 	 * @return the Java variable name
 	 */
-	public String getVarName();
+	String getVarName();
 	
 	/**
 	 * Return the fully qualified class name that represents this property
 	 */
-	public String getAbsoluteClassName();
+	String getAbsoluteClassName();
 
 	/**
 	 * Return the name of the class without the the package prefix that represents this property
 	 */
-	public String getClassName ();
+	String getClassName ();
 
 	/**
 	 * Return the fully qualified class name or interface if applicable that represents this property
 	 */
-	public String getAbsoluteSignatureClassName();
+	String getAbsoluteSignatureClassName();
 
 	/**
 	 * Return the name of the class or interface if applicable without the the package prefix that represents this property
 	 */
-	public String getSignatureClassName ();
+	String getSignatureClassName ();
 
 	/**
 	 * Return the package prefix for this property class without the class name
 	 */
-	public String getPackage();
+	String getPackage();
 
 	/**
 	 * Return the parent class for this property
 	 * @return the parent HibernateClass
 	 */
-	public HibernateClass getParent();
+	HibernateClass getParent();
 	
 	/**
 	 * Return the column name that this represents
 	 * @return the column name
 	 */
-	public String getColumn();
+	String getColumn();
 
 	/*
 	 * Return the meta-data associated with this element
@@ -85,30 +85,30 @@ public interface IHibernateClassProperty {
 	/**
 	 * Return true if the type of this property represents a primitive
 	 */
-	public boolean isPrimitive();
+	boolean isPrimitive();
 
 	/**
 	 * Return the object class representation for this class
 	 */
-	public String getObjectClass ();
+	String getObjectClass ();
 
 	/**
 	 * Return the static name for this property
 	 */
-	public String getStaticName ();
+	String getStaticName ();
 	
 	/**
 	 * How to initialize the property of a new object. 
 	 * @return the initialization expression
 	 */
-	public String getInitializationExpression();
-	
+	String getInitializationExpression();
+
 	/**
 	 * The order to initialize the property of a new object.
 	 * The more the value is, the later it is initialized.
 	 * Null (unspecified) values have the least priority.
 	 * @return the initialization order value
 	 */
-	public Double getInitializationOrder();
+	Double getInitializationOrder();
 
 }

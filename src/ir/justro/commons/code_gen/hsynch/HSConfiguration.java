@@ -1,6 +1,6 @@
 package ir.justro.commons.code_gen.hsynch;
 
-import ir.viratech.commons.code_gen.util.GenerationConfiguration;
+import ir.justro.commons.code_gen.util.GenerationConfiguration;
 
 import java.io.File;
 import java.util.Collection;

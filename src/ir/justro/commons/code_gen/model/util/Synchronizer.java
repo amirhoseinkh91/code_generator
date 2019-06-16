@@ -1,17 +1,17 @@
 package ir.justro.commons.code_gen.model.util;
 
-import ir.viratech.commons.code_gen.hsynch.Constants;
-import ir.viratech.commons.code_gen.model.ModelGenerationConfigurationHolder;
-import ir.viratech.commons.code_gen.model.mapping.HibernateClass;
-import ir.viratech.commons.code_gen.model.mapping.HibernateClassCollectionProperty;
-import ir.viratech.commons.code_gen.model.mapping.HibernateComponentClass;
-import ir.viratech.commons.code_gen.model.mapping.HibernateDocument;
-import ir.viratech.commons.code_gen.model.mapping.HibernateMappingManager;
-import ir.viratech.commons.code_gen.model.resource.ResourceManager;
-import ir.viratech.commons.code_gen.model.resource.Snippet;
-import ir.viratech.commons.code_gen.model.resource.SnippetContext;
-import ir.viratech.commons.code_gen.model.resource.Template;
-import ir.viratech.commons.code_gen.model.resource.TemplateLocation;
+import ir.justro.commons.code_gen.hsynch.Constants;
+import ir.justro.commons.code_gen.model.ModelGenerationConfigurationHolder;
+import ir.justro.commons.code_gen.model.mapping.HibernateClass;
+import ir.justro.commons.code_gen.model.mapping.HibernateClassCollectionProperty;
+import ir.justro.commons.code_gen.model.mapping.HibernateComponentClass;
+import ir.justro.commons.code_gen.model.mapping.HibernateDocument;
+import ir.justro.commons.code_gen.model.mapping.HibernateMappingManager;
+import ir.justro.commons.code_gen.model.resource.ResourceManager;
+import ir.justro.commons.code_gen.model.resource.Snippet;
+import ir.justro.commons.code_gen.model.resource.SnippetContext;
+import ir.justro.commons.code_gen.model.resource.Template;
+import ir.justro.commons.code_gen.model.resource.TemplateLocation;
 
 import java.io.File;
 import java.io.IOException;
