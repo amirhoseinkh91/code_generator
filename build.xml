@@ -4,10 +4,10 @@
 <!--
  * Ant Build File
  * 
- * @author Kian Mirjalali
+ * @author Amir H. Khalouei
 -->
 
-<project name="ViraGenerator" basedir=".">
+<project name="CodeGenerator" basedir=".">
 
     <property name="project.name" value="${ant.project.name}"/>
     <property environment="env"/>

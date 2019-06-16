@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<uiModel 
+ 		xmlns="http://viraTech.ir/code_gen/ui/uiModel"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://viraTech.ir/code_gen/ui/uiModel
+				uiModel.xsd "
+		>
+	
+	<dto dtoName="AuthUserLightDTO" entityName="AuthUser" 
+			entityPackage="ir.viratech.commons.code_gen.ui.test.model.user" 
+			package="ir.viratech.commons.code_gen.ui.test.api.user">
+		<prop name="uid" internalName="extuid" save="disabled" searchable="false" sortable="false" />
+		<prop name="username" />
+	</dto>
+	<dto name="User" genFIC="true" extentKey="full" 
+			entityPackage="ir.viratech.commons.code_gen.ui.test.model.user" 
+			package="ir.viratech.commons.code_gen.ui.test.api.user" >
+		<prop name="uid" internalName="extuid" save="disabled" searchable="false" sortable="false" />
+		<prop name="username" trackModif="true" save="hooked" searchExp="authUser.username" />
+		<prop name="password" load="disabled" trackModif="true" toString="abstract" client-widget="password"/>
+		<prop name="enabled" type="bool" save="hooked" toString="value" searchExp="authUser.enabled" />
+		<prop name="firstName" toString="omitted" fieldInfo="abstract" searchExp="authUser.firstName" />
+		<prop name="lastName" load="hooked-cast" toString="hooked" searchExp="authUser.lastName" />
+		<prop name="roles" load="abstract" save="disabled" />
+		
+<!-- 
+		<prop name="roles" internalName="rolesRelationMap"
+			internalType="ir.viratech.commons.util.relation_map.RelationMap&lt;ir.viratech.rest_proj.model.user.role.UserRole&gt;" 
+			type="ir.viratech.commons.api.dto.relation_map.DisplableRelationMapDTO&lt;ir.viratech.rest_proj.model.user.role.UserRole&gt;"
+			load="hooked-dtoLoadFrom" 
+			typeKey="collection"
+			save="abstract"
+			client-required="false"/>
+		
+		<prop-dto name="features"
+			internalName="featuresRelationMap"
+			internalType="ir.viratech.commons.util.relation_map.RelationMap&lt;ir.viratech.commons.code_gen.ui.test.model.user.Feature&gt;" 
+			type="ir.viratech.commons.api.dto.relation_map.DisplableRelationMapDTO&lt;ir.viratech.commons.code_gen.ui.test.model.user.Feature&gt;"
+			fieldInfo="disabled"
+			searchable="false"
+			load="hooked-dtoLoadFrom" 
+			save="disabled"
+			trackModif="true" />
+		
+		<prop-dto name="authUser" 
+ 				type="ir.viratech.commons.code_gen.ui.test.api.user.dto.AuthUserLightDTO" 
+ 				internalType="ir.viratech.commons.code_gen.ui.model.user.AuthUser" 
+ 				save="hooked-replaceEntity-notNull" trackModif="true" />
+ -->
+		
+	</dto>
+	
+	<resource name="User" 
+			package="ir.viratech.commons.code_gen.ui.test.api.user" 
+			entityPackage="ir.viratech.commons.code_gen.ui.test.model.user"
+			resourcePath="user" 
+			bundlePrefix="user."
+			entityMgr="ir.justro.commons.code_gen.ui.test.model.user.UserMgr"
+			fullDto="ir.justro.commons.code_gen.ui.test.api.user.dto.UserFullDTO"
+			featureEntityName="USER" 
+			swagger="disabled" >
+	</resource>
+</uiModel>
