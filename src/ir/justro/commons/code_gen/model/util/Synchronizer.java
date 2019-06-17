@@ -29,6 +29,10 @@ public class Synchronizer {
     public static final String PARAM_PACKAGE = "package";
     public static final String PARAM_MODULE = "moduleName";
 
+    public static final String PARAM_DAO_PACKAGE = "daoPackage";
+    public static final String PARAM_MODEL_PACKAGE = "modelPackage";
+    public static final String PARAM_MGR_PACKAGE = "mgrPackage";
+
     public static final String PARAM_MODEL_MODULE = "modelModuleName";
     public static final String PARAM_DAO_MODULE = "daoModuleName";
     public static final String PARAM_MGR_MODULE = "mgrModuleName";
@@ -261,7 +265,7 @@ public class Synchronizer {
             // create value object and proxy
             generateClassFile(TEMPLATE_BASE_VALUE_OBJECT, new VelocityContext(context), hc.getModelModuleName(), hc.getBaseValueObjectPackage(), hc.getBaseValueObjectClassName(), true);
             generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, new VelocityContext(context), hc.getModelModuleName(), hc.getValueObjectPackage(), hc.getValueObjectClassName());
-            generateModuleInfo(TEMPLATE_VALUE_MODULE_INFO, new VelocityContext(context), hc.getModelModuleName());
+            generateModuleInfo(TEMPLATE_VALUE_MODULE_INFO, new VelocityContext(context), hc.getModelModuleName(), hc.getDAOPackage(), hc.getValueObjectPackage(), hc.getMGRPackage());
             if (hc.hasProxy())
                 generateProxyClassFile(TEMPLATE_VALUE_OBJECT_PROXY, TEMPLATE_VALUE_OBJECT_PROXY_CONTENTS, new VelocityContext(context), hc.getProxyPackage(), hc.getValueObjectProxyClassName());
 
@@ -272,7 +276,7 @@ public class Synchronizer {
                     Context context2 = createContextWithSingleParam(context, PARAM_CLASS, hcc);
                     generateClassFile(TEMPLATE_BASE_VALUE_OBJECT, context2, hcc.getModelModuleName(), hcc.getBaseValueObjectPackage(), hcc.getBaseValueObjectClassName(), true);
                     generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, context2, hcc.getModelModuleName(), hcc.getValueObjectPackage(), hcc.getClassName());
-                    generateModuleInfo(TEMPLATE_VALUE_MODULE_INFO, new VelocityContext(context), hcc.getModelModuleName());
+                    generateModuleInfo(TEMPLATE_VALUE_MODULE_INFO, new VelocityContext(context), hcc.getModelModuleName(), hcc.getDAOPackage(), hcc.getValueObjectPackage(), hcc.getMGRPackage());
                 }
             }
             for (HibernateClassCollectionProperty hccp : hc.getCollectionList()) {
@@ -280,7 +284,7 @@ public class Synchronizer {
                     Context context2 = createContextWithSingleParam(context, PARAM_CLASS, chc);
                     generateClassFile(TEMPLATE_BASE_VALUE_OBJECT, context2, chc.getModelModuleName(), chc.getBaseValueObjectPackage(), chc.getBaseValueObjectClassName(), true);
                     generateExtensionClassFile(TEMPLATE_VALUE_OBJECT, SNIPPET_VALUE_OBJECT_CONSTRUCTOR, context2, chc.getModelModuleName(), chc.getValueObjectPackage(), chc.getClassName());
-                    generateModuleInfo(TEMPLATE_VALUE_MODULE_INFO, new VelocityContext(context), chc.getModelModuleName());
+                    generateModuleInfo(TEMPLATE_VALUE_MODULE_INFO, new VelocityContext(context), chc.getModelModuleName(), chc.getDAOPackage(), chc.getValueObjectPackage(), chc.getMGRPackage());
                 }
             }
 
@@ -301,14 +305,13 @@ public class Synchronizer {
             //generateClassFile(TEMPLATE_ROOT_DAO, new VelocityContext(context), hc.getRootDAOPackage(), hc.getRootDAOClassName(), false);
             generateClassFile(TEMPLATE_BASE_DAO, new VelocityContext(context), hc.getDAOModuleName(), hc.getBaseDAOPackage(), hc.getBaseDAOClassName(), true);
             generateClassFile(TEMPLATE_DAO, new VelocityContext(context), hc.getDAOModuleName(), hc.getDAOPackage(), hc.getDAOClassName(), false);
-            generateModuleInfo(TEMPLATE_DAO_MODULE_INFO, new VelocityContext(context), hc.getDAOModuleName());
+            generateModuleInfo(TEMPLATE_DAO_MODULE_INFO, new VelocityContext(context), hc.getDAOModuleName(), hc.getDAOPackage(), hc.getValueObjectPackage(), hc.getMGRPackage());
             if (this.ifaceGenerationEnabled)
                 generateClassFile(TEMPLATE_IDAO, new VelocityContext(context), hc.getDAOModuleName(), hc.getInterfacePackage(), hc.getDAOInterfaceName(), false);
             if (mgrGenerationEnabled) {
                 generateClassFile(TEMPLATE_BASE_MGR, new VelocityContext(context), hc.getMGRModuleName(), hc.getBaseMGRPackage(), hc.getBaseMGRClassName(), true);
                 generateClassFile(TEMPLATE_MGR, new VelocityContext(context), hc.getMGRModuleName(), hc.getMGRPackage(), hc.getMGRClassName(), false);
-                generateModuleInfo(TEMPLATE_MGR_MODULE_INFO, new VelocityContext(context), hc.getMGRModuleName());
-
+                generateModuleInfo(TEMPLATE_MGR_MODULE_INFO, new VelocityContext(context), hc.getMGRModuleName(), hc.getDAOPackage(), hc.getValueObjectPackage(), hc.getMGRPackage());
             }
         }
 
@@ -323,11 +326,14 @@ public class Synchronizer {
         return true;
     }
 
-    private void generateModuleInfo(String velocityTemplate, Context context, String moduleName) {
+    private void generateModuleInfo(String velocityTemplate, Context context, String moduleName, String daoPackage, String valueObjectPackage ,String mgrPackage) {
         File unit = getModuleInfoFile(moduleName);
         Template template = ResourceManager.getInstance().getTemplate(velocityTemplate);
         if (!unit.exists() || force) {
             Context context2 = createContextWithSingleParam(context, PARAM_MODULE, moduleName);
+            context2.put(PARAM_MODEL_PACKAGE , valueObjectPackage);
+            context2.put(PARAM_MGR_PACKAGE , mgrPackage);
+            context2.put(PARAM_DAO_PACKAGE , daoPackage);
             String content = template.merge(context2);
             writeCompilationUnit(unit, content);
         }

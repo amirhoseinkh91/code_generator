@@ -1,3 +1,4 @@
 module ${moduleName}{
 
-    requires ${modelModuleName};
+    requires transitive ${modelModuleName};
+    exports ${daoPackage} to ${mgrModuleName};

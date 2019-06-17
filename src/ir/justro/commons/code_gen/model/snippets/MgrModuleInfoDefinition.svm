@@ -1,4 +1,4 @@
 module ${moduleName} {
 
-    requires ${modelModuleName};
+    exports ${mgrPackage};
     requires ${daoModuleName};

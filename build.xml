@@ -7,7 +7,7 @@
  * @author Amir H. Khalouei
 -->
 
-<project name="ViraGenerator" basedir=".">
+<project name="JustroCodeGenerator" basedir=".">
 
     <property name="project.name" value="${ant.project.name}"/>
     <property environment="env"/>
