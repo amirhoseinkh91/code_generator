@@ -108,6 +108,7 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
         this.tableSchemaName = document.getSchemaName();
         setNode(node);
         for (Node attNode : XmlUtil.getAttributesIterable(node)) {
+            setModuleName(attNode);
             if (attNode.getNodeName().equals("table")) {
                 tableName = attNode.getNodeValue();
             }
@@ -116,9 +117,6 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
             }
             if (attNode.getNodeName().equals("proxy")) {
                 proxy = attNode.getNodeValue();
-            }
-            if (attNode.getNodeName().equals("module")) {
-                moduleName = attNode.getNodeValue();
             } else if ((type == TYPE_CLASS || type == TYPE_JOINED_SUBCLASS || type == TYPE_UNION_SUBCLASS || type == TYPE_SUBCLASS)
                     && attNode.getNodeName().equals("name")) {
                 setValueObjectClassName(attNode.getNodeValue());
@@ -138,6 +136,12 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
         }
         if (null != getAbsoluteValueObjectProxyClassName() && getAbsoluteValueObjectProxyClassName().equals(getAbsoluteValueObjectClassName())) {
             proxy = null;
+        }
+    }
+
+    protected void setModuleName(Node attNode) {
+        if (attNode.getNodeName().equals("module")) {
+            moduleName = attNode.getNodeValue();
         }
     }
 
@@ -1016,18 +1020,25 @@ public class HibernateClass extends BaseElement implements Comparable<HibernateC
     }
 
     public String getDAOModuleName() {
-        return this.moduleName + ".dao";
+        return getModuleName() + ".dao";
     }
 
     public String getMGRModuleName() {
-        return this.moduleName + ".logic";
+        return getModuleName() + ".logic";
     }
 
     public String getModelModuleName() {
-        return this.moduleName + ".model";
+        return getModuleName() + ".model";
     }
 
     public String getModuleName() {
-        return moduleName;
+        String var;
+        if (parent == null)
+            var = this.moduleName;
+        else
+            var = parent.getModuleName();
+        if (var == null)
+            var = this.getValueObjectClassName().toLowerCase();
+        return var;
     }
 }

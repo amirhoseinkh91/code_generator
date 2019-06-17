@@ -266,7 +266,6 @@ application through a property of the Java class. -->
 )>
 	<!ATTLIST subclass entity-name CDATA #IMPLIED>
 	<!ATTLIST subclass name CDATA #IMPLIED>
-	<!ATTLIST subclass module CDATA #REQUIRED>                            <!-- this is the module name -->
 	<!ATTLIST subclass proxy CDATA #IMPLIED>							<!-- default: no proxy interface -->
 	<!ATTLIST subclass discriminator-value CDATA #IMPLIED>				<!-- default: unqualified class name | none -->
 	<!ATTLIST subclass dynamic-update (true|false) "false">
@@ -300,7 +299,6 @@ application through a property of the Java class. -->
 )>
 	<!ATTLIST joined-subclass entity-name CDATA #IMPLIED>
 	<!ATTLIST joined-subclass name CDATA #IMPLIED>
-	<!ATTLIST joined-subclass module CDATA #REQUIRED>                            <!-- this is the module name -->
 	<!ATTLIST joined-subclass proxy CDATA #IMPLIED>				 		<!-- default: no proxy interface -->
 	<!ATTLIST joined-subclass table CDATA #IMPLIED>				 		<!-- default: unqualified class name -->
 	<!ATTLIST joined-subclass schema CDATA #IMPLIED>
@@ -337,7 +335,6 @@ application through a property of the Java class. -->
 )>
 	<!ATTLIST union-subclass entity-name CDATA #IMPLIED>
 	<!ATTLIST union-subclass name CDATA #IMPLIED>
-	<!ATTLIST union-subclass module CDATA #REQUIRED>                            <!-- this is the module name -->
 	<!ATTLIST union-subclass proxy CDATA #IMPLIED>						<!-- default: no proxy interface -->
 	<!ATTLIST union-subclass table CDATA #IMPLIED>						<!-- default: unqualified class name -->
 	<!ATTLIST union-subclass schema CDATA #IMPLIED>

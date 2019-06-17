@@ -17,10 +17,19 @@
         <component module="location" name="address" class="example.address.Address">
             <property name="city" type="string" column="address_city"/>
         </component>
+
+        <joined-subclass name="ExtendedUser">
+            <key column="id"/>
+        </joined-subclass>
+
     </class>
 
-    <joined-subclass module="" name="">
-        <key></key>
-    </joined-subclass>
+    <class module="role" name="Role" table="ROLES" schema="justro">
+        <id name="id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+
+        <property name="name" type="string"/>
+    </class>
 
 </hibernate-mapping>
