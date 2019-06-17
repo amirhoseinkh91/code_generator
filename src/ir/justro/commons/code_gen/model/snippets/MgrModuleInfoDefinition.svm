@@ -1,0 +1,4 @@
+module ${moduleName} {
+
+    requires ${modelModuleName};
+    requires ${daoModuleName};

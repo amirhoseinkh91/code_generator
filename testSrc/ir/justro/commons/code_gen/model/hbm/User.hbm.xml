@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="example.user">
 
-    <class module="test.module.user" name="User" table="USERS" schema="justro">
+    <class module="user" name="User" table="USERS" schema="justro">
         <id name="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
@@ -14,10 +14,13 @@
 
         <property name="password" type="string" not-null="true" unique="false"/>
 
-        <component module="test.module.address" name="address" class="example.address.Address">
+        <component module="location" name="address" class="example.address.Address">
             <property name="city" type="string" column="address_city"/>
         </component>
-
     </class>
+
+    <joined-subclass module="" name="">
+        <key></key>
+    </joined-subclass>
 
 </hibernate-mapping>
